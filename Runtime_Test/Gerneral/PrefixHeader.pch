@@ -1,0 +1,164 @@
+//
+//  PrefixHeader.pch
+//  Runtime_Test
+//
+//  Created by jielisong on 2019/9/17.
+//  Copyright © 2019 cz10000. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
+
+#ifdef DEBUG
+
+#define NSLog(FORMAT, ...) fprintf(stderr, "%s:%d\t%s\n", [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String]);
+
+#else
+
+#define NSLog(FORMAT, ...) nil
+
+#endif
+
+
+#pragma mark - ---------------------系统屏幕尺寸和大小---------------------
+
+//屏幕尺寸
+#define Get_Real_Px()
+#define ScreenFrame                         [[UIScreen mainScreen] bounds]
+#define ScreenHeight                        [UIScreen mainScreen].bounds.size.height
+#define ScreenWidth                         [UIScreen mainScreen].bounds.size.width
+#define StatusBar_Height                    ((IS_IPHONE_X_XS || IS_IPHONE_XR || IS_IPHONE_XS_Max) ? 44.0 : 20.0)
+#define SafeAreaTopHeight                   ((IS_IPHONE_X_XS || IS_IPHONE_XR || IS_IPHONE_XS_Max) ? 88 : 64)
+#define SafeAreaBottomHeight                ((IS_IPHONE_X_XS || IS_IPHONE_XR || IS_IPHONE_XS_Max) ? 34 : 0)
+#define FrameHeight                         [UIScreen mainScreen].bounds.size.height - SafeAreaBottomHeight - SafeAreaTopHeight
+#define TabBarHeight                        65
+
+//获得当前屏幕宽与6的屏宽比例
+#define RATIO_W                             [UIScreen mainScreen].bounds.size.width/375
+//获得当前屏幕高与6的屏高比例
+#define RATIO_H                             [UIScreen mainScreen].bounds.size.height/667
+#define X(x)                                x*RATIO_W
+#define Y(y)                                y*RATIO_H
+#define Width(width)                        width*RATIO_W
+#define Height(height)                      height*RATIO_H
+
+#define SysVersion                          [[[UIDevice currentDevice] systemVersion] doubleValue]
+
+//iphone型号判断
+
+// IPHONE_4S
+#define IS_IPHONE_4S ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// IPHONE_5
+#define IS_IPHONE_5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// IPHONE_6 IPHONE_6S
+#define IS_IPHONE_6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// IPHONE_6_PLUS
+#define IS_IPHONE_6_PLUS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)) : NO)
+
+// IPHONE_X IPHONE_XS
+#define IS_IPHONE_X_XS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// IPHONE_XR
+#define IS_IPHONE_XR ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// IPHONE_XS_Max
+#define IS_IPHONE_XS_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) : NO)
+
+
+
+
+#pragma mark - ---------------------颜色定义---------------------
+//颜色-快捷定义
+#define kWhiteColor(white,alph)             [UIColor colorWithWhite:white alpha:alph]
+#define kColor(color)                       [UIColor color]
+#define kColorFromRGB(r,g,b)                [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define kColorFromSameRGB(value)            [UIColor colorWithRed:(value)/255.0 green:(value)/255.0 blue:(value)/255.0 alpha:1.0]
+#define kColorFromHexAlph(string,alph)      [UIColor colorWithHexString:string alpha:alph]
+#define kColorFromHex(string)               [UIColor colorWithHexString:string]
+
+//预定义颜色-NavBar
+#define Color_NavBarTitle                   Color_fff //导航标题文字颜色
+#define Color_NavBarBg                      Color_Orange//导航栏背景的颜色
+#define Color_NavBarButtonTint              Color_fff//[UIColor whiteColor]//导航栏标题及导航按钮的颜色：白色
+
+//TabBar
+#define Color_TbUnSelectTintColor           [UIColor colorWithHexString:@"787d83"]
+#define Color_TbSelectTintColor             Color_Orange//7c9a3d
+
+//view-background
+#define Color_ViewBg                        kColorFromHex(@"f5f5f5")
+#define Color_Orange                        kColorFromHex(@"ff4f20") //橘色
+#define Color_Yellow                        kColorFromHex(@"fd9a28") //黄色
+#define Color_Green                         kColorFromHex(@"09bb07") //黄色
+
+
+#define Color_GreenN                         kColorFromHex(@"22BD6D") //黄色
+
+//
+#define Color_333                           kColorFromHex(@"333333")//：黑色
+#define Color_000                           kColorFromHex(@"000000")//：黑色
+#define Color_2626                          kColorFromHex(@"262626")//：黑色
+#define Color_666                           kColorFromHex(@"666666")//灰色(tabbar灰色图标)
+#define Color_999                           kColorFromHex(@"999999")//灰色
+#define Color_888                           kColorFromHex(@"888888")//灰色
+#define Color_bbb                           kColorFromHex(@"bbbbbb")
+#define Color_ccc                           kColorFromHex(@"cccccc")//浅灰色
+#define Color_eee                           kColorFromHex(@"eeeeee")
+#define Color_fff                           kColorFromHex(@"ffffff")
+#define Color_d8d8                          kColorFromHex(@"d8d8d8")
+#define Color_dbdb                          kColorFromHex(@"dbdbdb")
+#define Color_f5f5                          kColorFromHex(@"f5f5f5")
+#define Color_f4f4                          kColorFromHex(@"f4f4f4")
+#define Color_dfdf                          kColorFromHex(@"dfdfdf")
+#define Color_8282                          kColorFromHex(@"828282") //灰色
+#define Color_d6d6                          kColorFromHex(@"d6d6d6") //灰色
+#define Color_9797                          kColorFromHex(@"979797") //灰色
+#define Color_eded                          kColorFromHex(@"ededed") //灰色
+#define Color_5d9c                          kColorFromHex(@"5d9cec") //灰色
+
+#define Color_2914                          kColorFromHex(@"FF2914")
+
+#define Color_953f                          kColorFromHex(@"#FF953F")
+
+
+#pragma mark - ---------------------图片定义---------------------
+//图片-快捷定义
+#define kImage(image)                       [UIImage imageNamed:image]
+
+
+#define DefaultPhoto                        kImage(@"default_photo")
+#define DefaultLogo                         kImage(@"default_comlogo")
+
+#define DefaultBanner                       kImage(@"default_banner")
+
+#define DefaultBanner1                       kImage(@"default_banner1")
+#define DefaultBanner2                       kImage(@"default_banner2")
+
+
+#pragma mark - ---------------------字体定义---------------------
+
+//字体-快捷定义
+#define kFont(font)                         [UIFont systemFontOfSize:font]
+#define BoldFont(xxx)                       [UIFont boldSystemFontOfSize:xxx]
+
+//字体预定义-TabBar
+#define Font_TabBarTitle                    kFont(11)  // tabbar字体大小
+#define Font_NavBarTitle                    kFont(18)  //导航栏标题大小
+#define Font_NavBarButtonTitle              kFont(16)     //导航栏按钮文字大小
+
+#pragma mark - ---------------------字符串定义---------------------
+
+//字符串-快捷定义
+#define FormatNumber(num)                   [NSString stringWithFormat:@"%@",@(num)]
+#define FormatFloat(num)                    [NSString stringWithFormat:@"%f",num]
+#define FormatDoubleFloat(num)              [NSString stringWithFormat:@"%.2f",num]
+#define FormatString(string)                [NSString stringWithFormat:@"%@",string]
+#define kURL(string)                        [NSURL URLWithString:string]
